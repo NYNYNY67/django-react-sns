@@ -37,6 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'snsapi.apps.SnsapiConfig',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -47,7 +52,24 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware'
 ]
+
+# IPホワイトリストの設定
+CORS_ORIGIN_WHITELIST = [
+    'https://localhost:3000'
+]
+
+# DRFのデフォルトの認証方式・アクセス権限を設定
+REST_FRAMEWORKS = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentification.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
 
 ROOT_URLCONF = 'config.urls'
 
